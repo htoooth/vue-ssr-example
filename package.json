@@ -36,7 +36,7 @@
     "chokidar": "^3.0.2",
     "compression": "^1.7.4",
     "cross-env": "^5.2.0",
-    "css-loader": "^3.0.0",
+    "css-loader": "^3.1.0",
     "express": "^4.17.1",
     "file-loader": "^4.0.0",
     "lru-cache": "^5.1.1",
@@ -58,6 +58,9 @@
     "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
+    "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
+    "@vue/babel-preset-jsx": "^1.0.0",
+    "autoprefixer": "^9.6.1",
     "babel-eslint": "^10.0.2",
     "eslint": "^6.0.1",
     "eslint-config-prettier": "^6.0.0",
@@ -65,8 +68,14 @@
     "eslint-plugin-vue": "^5.2.3",
     "husky": "^3.0.0",
     "lint-staged": "^9.2.0",
+    "node-sass": "^4.12.0",
+    "postcss": "^7.0.17",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.7.0",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
     "stylelint": "^10.1.0",
     "stylelint-config-prettier": "^5.2.0",
     "stylelint-prettier": "^1.1.1"
