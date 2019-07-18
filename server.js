@@ -3,6 +3,10 @@ const LRU = require('lru-cache')
 const express = require('express')
 const server = express()
 
+const serverInfo =
+  `express/${require('express/package.json').version} ` +
+  `vue-server-renderer/${require('vue-server-renderer/package.json').version}`
+
 const resolve = file => path.resolve(__dirname, file)
 
 const template = require('fs').readFileSync(resolve('./src/index.template.html'), 'utf-8')
@@ -25,6 +29,10 @@ server.use('/dist', serve('./dist'))
 server.use('/public', serve('./public'))
 
 server.get('*', (req, res) => {
+
+  res.setHeader("Content-Type", "text/html")
+  res.setHeader("Server", serverInfo)
+
   const context = {
     url: req.url
   }
