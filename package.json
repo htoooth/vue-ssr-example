@@ -4,13 +4,45 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:server": "cross-env NODE_ENV=development webpack --config build/webpack.server.config.js --progress",
+    "build:client": "cross-env NODE_ENV=development webpack --config build/webpack.client.config.js --progress",
+    "build": "rimraf dist && npm run build:server && npm run build:client",
+    "dev": "node dev-server",
+    "start": "cross-env NODE_ENV=production node dev-server",
+    "postinstall": "npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.5.5",
+    "babel-loader": "^8.0.6",
+    "chokidar": "^3.0.2",
+    "compression": "^1.7.4",
+    "cross-env": "^5.2.0",
+    "css-loader": "^3.0.0",
+    "express": "^4.17.1",
+    "file-loader": "^4.0.0",
+    "lru-cache": "^5.1.1",
+    "memory-fs": "^0.4.1",
+    "rimraf": "^2.6.3",
+    "route-cache": "^0.4.4",
+    "serve-favicon": "^2.5.0",
+    "url-loader": "^2.0.1",
     "vue": "^2.6.10",
-    "vue-server-renderer": "^2.6.10"
+    "vue-loader": "^15.7.1",
+    "vue-router": "^3.0.7",
+    "vue-server-renderer": "^2.6.10",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-middleware": "^3.7.0",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-merge": "^4.2.1",
+    "webpack-node-externals": "^1.7.2"
   }
 }
