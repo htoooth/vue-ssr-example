@@ -1,7 +1,5 @@
-
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-
 
 module.exports = {
   context: path.resolve(__dirname, '../src'),
@@ -34,10 +32,8 @@ module.exports = {
 
   resolve: {
     alias: {
-      'public': path.resolve(__dirname, '../public')
+      public: path.resolve(__dirname, '../public')
     }
   },
-  plugins: [
-    new VueLoaderPlugin()
-  ]
+  plugins: [new VueLoaderPlugin()]
 }

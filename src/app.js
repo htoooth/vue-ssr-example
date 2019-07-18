@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import {createRouter} from './router'
+import { createRouter } from './router'
 
 export function createApp() {
   const router = createRouter()
@@ -10,5 +10,5 @@ export function createApp() {
     render: h => h(App)
   })
 
-  return { app, router}
+  return { app, router }
 }

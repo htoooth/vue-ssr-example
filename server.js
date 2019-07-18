@@ -9,29 +9,34 @@ const serverInfo =
 
 const resolve = file => path.resolve(__dirname, file)
 
-const template = require('fs').readFileSync(resolve('./src/index.template.html'), 'utf-8')
+const template = require('fs').readFileSync(
+  resolve('./src/index.template.html'),
+  'utf-8'
+)
 const serverBundle = require(resolve('./dist/vue-ssr-server-bundle.json'))
 const clientManifest = require(resolve('./dist/vue-ssr-client-manifest.json'))
 
-const renderer = require('vue-server-renderer').createBundleRenderer(serverBundle, {
-  cache: new LRU({
-    max: 1000,
-    maxAge: 1000 * 60 * 15
-  }),
-  runInNewContext: false,
-  template,
-  clientManifest
-})
+const renderer = require('vue-server-renderer').createBundleRenderer(
+  serverBundle,
+  {
+    cache: new LRU({
+      max: 1000,
+      maxAge: 1000 * 60 * 15
+    }),
+    runInNewContext: false,
+    template,
+    clientManifest
+  }
+)
 
-const serve = (path) => express.static(resolve(path))
+const serve = path => express.static(resolve(path))
 
 server.use('/dist', serve('./dist'))
 server.use('/public', serve('./public'))
 
 server.get('*', (req, res) => {
-
-  res.setHeader("Content-Type", "text/html")
-  res.setHeader("Server", serverInfo)
+  res.setHeader('Content-Type', 'text/html')
+  res.setHeader('Server', serverInfo)
 
   const context = {
     url: req.url
@@ -48,7 +53,7 @@ server.get('*', (req, res) => {
       res.end(html)
     }
   })
-});
+})
 
 server.listen(8000, () => {
   console.log('start server at ', 'http://localhost:8000')

@@ -1,4 +1,3 @@
-
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.base.config')
 const nodeExternals = require('webpack-node-externals')
@@ -8,14 +7,12 @@ module.exports = merge(baseConfig, {
   mode: 'production',
   entry: './entry-server.js',
   target: 'node',
-  devtool: 'source-map',
+  devtool: '#source-map',
   output: {
     libraryTarget: 'commonjs2'
   },
   externals: nodeExternals({
     whitelist: /\.css$/
   }),
-  plugins: [
-    new VueSSRServerPlugin()
-  ]
+  plugins: [new VueSSRServerPlugin()]
 })
