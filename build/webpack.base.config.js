@@ -1,38 +1,18 @@
 const path = require('path')
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const prodMode = process.env.NODE_ENV === 'production'
 
 module.exports = {
   context: path.resolve(__dirname, '../src'),
-  devtool: '#cheap-module-source-map',
+  mode: prodMode ? 'production' : 'development',
 
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/dist/',
-    filename: '[name].[chunkhash].js'
+    filename: 'js/[name].[hash:7].js'
   },
 
   module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          compilerOptions: {
-            preserveWhitespace: false
-          }
-        }
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.jsx$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      }
-    ]
+    rules: []
   },
 
   resolve: {
@@ -40,5 +20,6 @@ module.exports = {
       public: path.resolve(__dirname, '../public')
     }
   },
-  plugins: [new VueLoaderPlugin()]
+
+  plugins: []
 }
