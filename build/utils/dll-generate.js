@@ -33,7 +33,7 @@ module.exports = ({ env = 'production', webpackConfig = {} } = {}) => {
     cssLoader({ env }),
     fontLoader({ env }),
     imageLoader({ env }),
-    jsLoader({ env }),
+    jsLoader({ env, sourceMap: true }),
     config,
     webpackConfig
   )

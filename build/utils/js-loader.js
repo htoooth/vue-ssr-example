@@ -1,7 +1,11 @@
 const TerserJSPlugin = require('terser-webpack-plugin')
 const { isProd, resolve } = require('./helper')
 
-module.exports = ({ env = 'production', dir = resolve('src') } = {}) => {
+module.exports = ({
+  env = 'production',
+  dir = [resolve('src')],
+  sourceMap = false
+} = {}) => {
   const prodMode = isProd(env)
 
   const config = {
@@ -10,7 +14,7 @@ module.exports = ({ env = 'production', dir = resolve('src') } = {}) => {
         {
           test: /\.m?js$/,
           exclude: /(node_modules|bower_components)/,
-          include: [dir],
+          include: [...dir],
           loader: 'babel-loader?cacheDirectory=true'
         }
       ]
@@ -23,7 +27,7 @@ module.exports = ({ env = 'production', dir = resolve('src') } = {}) => {
         new TerserJSPlugin({
           cache: true,
           parallel: true,
-          sourceMap: false,
+          sourceMap,
           terserOptions: {
             mangle: true,
             ie8: true,

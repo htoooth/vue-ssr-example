@@ -7,14 +7,14 @@ const cssLoaders = function(options) {
 
   var cssLoader = {
     loader: 'css-loader',
-    include: [options.dir || resolve('src')],
+    include: [...options.dir],
     options: {
       sourceMap: options.sourceMap
     }
   }
   var autoprefixerLoader = {
     loader: 'postcss-loader',
-    include: [options.dir || resolve('src')],
+    include: [...options.dir],
     options: {
       sourceMap: options.sourceMap
     }
@@ -26,7 +26,7 @@ const cssLoaders = function(options) {
     if (loader) {
       loaders.push({
         loader: loader + '-loader',
-        include: [dir || resolve('src')],
+        include: [...options.dir],
         options: Object.assign({}, loaderOptions, {
           sourceMap: options.sourceMap
         })
@@ -71,7 +71,7 @@ const styleLoaders = function(options) {
   return output
 }
 
-module.exports = ({ env = 'production', dir = resolve('src') } = {}) => {
+module.exports = ({ env = 'production', dir = [resolve('src')] } = {}) => {
   const prodMode = isProd(env)
   const hash = hashMode(env)
 

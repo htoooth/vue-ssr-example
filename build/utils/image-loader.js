@@ -2,7 +2,7 @@ const { isProd, hashMode, resolve } = require('./helper')
 
 module.exports = ({
   env = 'production',
-  dir = resolve('src/assets/image')
+  dir = [resolve('src/assets/image')]
 } = {}) => {
   const prodMode = isProd(env)
   const hash = hashMode(env)
@@ -12,7 +12,7 @@ module.exports = ({
       rules: [
         {
           test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-          include: [dir],
+          include: [...dir],
           use: [
             {
               loader: 'url-loader',
