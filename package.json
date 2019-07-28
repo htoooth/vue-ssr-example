@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build:server": "cross-env NODE_ENV=production webpack --config build/webpack.server.config.js --progress",
+    "build:dll": "cross-env NODE_ENV=production webpack --config build/webpack.dll.config.js --progress",
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.client.config.js --progress",
     "build": "rimraf dist && npm run build:server && npm run build:client",
     "dev": "cross-env NODE_ENV=development node dev-server",
@@ -60,6 +61,7 @@
   "devDependencies": {
     "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
     "@vue/babel-preset-jsx": "^1.0.0",
+    "assets-webpack-plugin": "^3.9.10",
     "autoprefixer": "^9.6.1",
     "babel-eslint": "^10.0.2",
     "cssnano": "^4.1.10",

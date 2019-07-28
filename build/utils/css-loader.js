@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const { isProd, hashMode } = require('./helper')
 
 const cssLoaders = function(options) {
@@ -74,7 +75,7 @@ module.exports = ({ env = 'production', autoprefixer, browsers } = {}) => {
   const config = {
     module: {
       rules: styleLoaders({
-        sourceMap: true,
+        sourceMap: !prodMode,
         extract: prodMode
       })
     },
@@ -90,7 +91,8 @@ module.exports = ({ env = 'production', autoprefixer, browsers } = {}) => {
         // chunkFilename: '[id].css',
         ignoreOrder: false, // Enable to remove warnings about conflicting order
         allChunks: true
-      })
+      }),
+      new OptimizeCssAssetsPlugin({})
     ]
   }
 

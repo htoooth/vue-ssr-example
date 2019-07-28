@@ -1,12 +1,13 @@
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.base.config.js')
-const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 
 const cssLoader = require('./utils/css-loader')
 const fontLoader = require('./utils/font-loader')
 const imageLoader = require('./utils/image-loader')
 const jsLoader = require('./utils/js-loader')
 const vueLoader = require('./utils/vue-loader')
+const dllApplyLoader = require('./utils/dll-apply')
+const vuessrClientLoader = require('./utils/vueSsrClient-loader')
 const env = process.env.NODE_ENV
 
 module.exports = merge(
@@ -16,18 +17,22 @@ module.exports = merge(
   imageLoader({ env }),
   jsLoader({ env }),
   vueLoader({ env }),
+  dllApplyLoader({ env }),
+  vuessrClientLoader({ env }),
   {
-    devtool: 'source-map',
+    devtool: 'cheap-module-source-map',
     target: 'web',
 
     entry: {
       app: './entry-client.js'
     },
-    plugins: [
-      // 此插件在输出目录中
-      // 生成 `vue-ssr-client-manifest.json`。
-      new VueSSRClientPlugin()
-    ],
+
+    resolve: {
+      alias: {
+        vue$: 'vue/dist/vue.esm.js'
+      }
+    },
+
     optimization: {
       moduleIds: 'hashed',
       runtimeChunk: {

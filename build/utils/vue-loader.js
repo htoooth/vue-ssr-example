@@ -1,4 +1,5 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { resolve } = require('./helper')
 
 module.exports = ({ env = 'production' } = {}) => {
   return {
@@ -16,7 +17,9 @@ module.exports = ({ env = 'production' } = {}) => {
         {
           test: /\.jsx$/,
           loader: 'babel-loader',
-          exclude: /node_modules/
+          exclude: /(node_modules|bower_components)/,
+          include: [resolve('src')],
+          loader: 'babel-loader?cacheDirectory=true'
         }
       ]
     },
