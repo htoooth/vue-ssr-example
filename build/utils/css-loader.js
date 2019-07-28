@@ -96,7 +96,17 @@ module.exports = ({ env = 'production', dir = resolve('src') } = {}) => {
         ignoreOrder: false, // Enable to remove warnings about conflicting order
         allChunks: true
       }),
-      new OptimizeCssAssetsPlugin({})
+      new OptimizeCssAssetsPlugin({
+        assetNameRegExp: /\.css$/g,
+        cssProcessorOptions: {
+          safe: true,
+          mergeLonghand: false,
+          discardComments: {
+            removeAll: true // 移除注释
+          }
+        },
+        canPrint: true
+      })
     ]
   }
 
