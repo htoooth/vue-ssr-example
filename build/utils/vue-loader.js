@@ -1,13 +1,14 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const { resolve } = require('./helper')
 
-module.exports = ({ env = 'production' } = {}) => {
+module.exports = ({ env = 'production', dir = resolve('src') } = {}) => {
   return {
     module: {
       rules: [
         {
           test: /\.vue$/,
           loader: 'vue-loader',
+          include: [dir],
           options: {
             compilerOptions: {
               preserveWhitespace: false
@@ -18,7 +19,7 @@ module.exports = ({ env = 'production' } = {}) => {
           test: /\.jsx$/,
           loader: 'babel-loader',
           exclude: /(node_modules|bower_components)/,
-          include: [resolve('src')],
+          include: [dir],
           loader: 'babel-loader?cacheDirectory=true'
         }
       ]

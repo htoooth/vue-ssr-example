@@ -1,18 +1,20 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const { isProd, hashMode } = require('./helper')
+const { isProd, hashMode, resolve } = require('./helper')
 
 const cssLoaders = function(options) {
   options = options || {}
 
   var cssLoader = {
     loader: 'css-loader',
+    include: [options.dir || resolve('src')],
     options: {
       sourceMap: options.sourceMap
     }
   }
   var autoprefixerLoader = {
     loader: 'postcss-loader',
+    include: [options.dir || resolve('src')],
     options: {
       sourceMap: options.sourceMap
     }
@@ -24,6 +26,7 @@ const cssLoaders = function(options) {
     if (loader) {
       loaders.push({
         loader: loader + '-loader',
+        include: [dir || resolve('src')],
         options: Object.assign({}, loaderOptions, {
           sourceMap: options.sourceMap
         })
@@ -68,7 +71,7 @@ const styleLoaders = function(options) {
   return output
 }
 
-module.exports = ({ env = 'production', autoprefixer, browsers } = {}) => {
+module.exports = ({ env = 'production', dir = resolve('src') } = {}) => {
   const prodMode = isProd(env)
   const hash = hashMode(env)
 
@@ -76,7 +79,8 @@ module.exports = ({ env = 'production', autoprefixer, browsers } = {}) => {
     module: {
       rules: styleLoaders({
         sourceMap: !prodMode,
-        extract: prodMode
+        extract: prodMode,
+        dir
       })
     },
     plugins: []

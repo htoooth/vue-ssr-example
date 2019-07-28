@@ -1,6 +1,9 @@
 const { hashMode, resolve } = require('./helper')
 
-module.exports = ({ env = 'production' } = {}) => {
+module.exports = ({
+  env = 'production',
+  dir = resolve('src/assets/font')
+} = {}) => {
   const hash = hashMode(env)
 
   return {
@@ -9,7 +12,7 @@ module.exports = ({ env = 'production' } = {}) => {
         {
           test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
           loader: 'url-loader',
-          include: [resolve('src/assets/font')],
+          include: [dir],
           options: {
             fallback: 'file-loader',
             limit: 10000,
