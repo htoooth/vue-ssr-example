@@ -1,7 +1,7 @@
-module.exports = ({ env = 'production' } = {}) => {
+module.exports = ({ env = 'production' } = {}, ignores) => {
   const config = {
     module: {
-      rules: [
+      rules: ignores || [
         {
           test: /\.s?css$/,
           use: 'ignore-loader'

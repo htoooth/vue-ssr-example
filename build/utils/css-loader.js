@@ -7,14 +7,12 @@ const cssLoaders = function(options) {
 
   var cssLoader = {
     loader: 'css-loader',
-    include: [...options.dir],
     options: {
       sourceMap: options.sourceMap
     }
   }
   var autoprefixerLoader = {
     loader: 'postcss-loader',
-    include: [...options.dir],
     options: {
       sourceMap: options.sourceMap
     }
@@ -26,7 +24,6 @@ const cssLoaders = function(options) {
     if (loader) {
       loaders.push({
         loader: loader + '-loader',
-        include: [...options.dir],
         options: Object.assign({}, loaderOptions, {
           sourceMap: options.sourceMap
         })
@@ -64,7 +61,8 @@ const styleLoaders = function(options) {
     var loader = loaders[extension]
     output.push({
       test: new RegExp('\\.' + extension + '$'),
-      use: loader
+      use: loader,
+      include: [...options.dir]
     })
   }
 
